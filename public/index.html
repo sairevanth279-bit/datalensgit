@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataLens — Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/upload.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="brand-panel">
+        <a class="brand" href="/"><span>✦</span> DataLens</a>
+        <div class="hero-copy">
+          <p class="eyebrow">Clarity, quickly</p>
+          <h1>Turn raw numbers into sharper decisions.</h1>
+          <p>Save your workspace and use the quick insight helper after you sign in.</p>
+        </div>
+        <p class="panel-footer">Built for focused teams and curious minds.</p>
+      </section>
+
+      <section class="auth-panel" id="authView">
+        <div class="form-wrap">
+          <p class="eyebrow accent">Welcome to DataLens</p>
+          <h2 id="formTitle">Sign in to your workspace</h2>
+          <p class="subtext" id="formSubtitle">Use your email to continue.</p>
+          <form id="authForm" novalidate>
+            <label id="nameField" class="hidden">Full name<input id="fullName" type="text" autocomplete="name" placeholder="Alex Morgan" /></label>
+            <label>Email address<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+            <label>Password<input id="password" type="password" autocomplete="current-password" placeholder="At least 8 characters" required /></label>
+            <button id="submitButton" type="submit">Sign in <span>→</span></button>
+          </form>
+          <p class="form-message" id="formMessage" role="alert"></p>
+          <p class="switcher" id="switcher">New to DataLens? <button type="button" id="switchMode">Create an account</button></p>
+        </div>
+      </section>
+
+      <section class="dashboard hidden" id="dashboardView">
+        <header class="dashboard-header"><a class="brand dark" href="/"><span>✦</span> DataLens</a><div><span id="userEmail"></span><button class="text-button" id="logout">Sign out</button></div></header>
+        <div class="dashboard-content">
+          <p class="eyebrow accent">Your quick utility</p>
+          <h2>Snapshot calculator</h2>
+          <p class="subtext">Paste comma-separated values to get a clean, instant summary.</p>
+          <div class="upload-card" id="uploadCard">
+            <p class="upload-title">Step 1 — Upload one file</p>
+            <p class="upload-copy">Any file type is accepted (up to 10 MB). It is stored as a PostgreSQL BYTEA record. Each account can upload only once.</p>
+            <div class="upload-controls"><input id="fileInput" type="file" /><button id="uploadFile" type="button">Upload file</button></div>
+            <p class="upload-status" id="uploadStatus" role="status">Upload a file to unlock the calculator.</p>
+          </div>
+          <div class="utility-card">
+            <p class="utility-step">Step 2 — Calculate</p>
+            <label>Values<input id="numbers" placeholder="12, 18, 24, 31, 39" /></label>
+            <button id="analyse" type="button" disabled>Calculate summary</button>
+            <div class="results hidden" id="results"></div>
+          </div>
+          <p class="joined" id="joined"></p>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
