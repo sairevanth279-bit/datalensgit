@@ -7,9 +7,9 @@ $Location = "centralindia"
 $PostgresServer = "datalens-pg-sai2026"
 $DatabaseName = "datalens"
 $DbAdmin = "datalensadmin"
-$DbAdminPassword = "CHANGE-ME-Use-A-Long-Password"
+$DbAdminPassword = "letsrocktheparty"
 $ContainerApp = "datalens-web-sai2026"
-$JwtSecret = "CHANGE-ME-Use-A-Long-Random-JWT-Secret"
+$JwtSecret = "letsrocktheparty2026"
 
 if ($PostgresServer -like "*CHANGE-ME*" -or $ContainerApp -like "*CHANGE-ME*" -or $DbAdminPassword -like "CHANGE-ME*" -or $JwtSecret -like "CHANGE-ME*") {
   throw "Set unique names and strong secrets at the top of this file before running it."
