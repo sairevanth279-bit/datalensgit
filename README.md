@@ -39,3 +39,7 @@ pg_dump --no-owner --no-acl $env:LOCAL_DATABASE_URL | psql $env:AZURE_DATABASE_U
 ```
 
 Azure Database for PostgreSQL requires TLS. The deployment creates a connection string with `sslmode=require`; the app also enables SSL when `NODE_ENV=production`. Azure's recommended secure connection settings are documented in [Azure's TLS guidance](https://learn.microsoft.com/en-us/azure/postgresql/security/security-tls-how-to-connect).
+
+### Keeping a demo low-cost
+
+Use Azure Container Apps instead of App Service Free for this Node application. The deployment sets the container app to zero minimum replicas, so it scales down while idle. Azure Container Apps includes a monthly free grant, but Azure Database for PostgreSQL is free for 12 months only for eligible new Azure accounts (B1MS, 32 GB storage). Check your subscription's pricing/credits before creating resources.

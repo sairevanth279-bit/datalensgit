@@ -4,11 +4,11 @@
 
 $ResourceGroup = "datalens-rg"
 $Location = "centralindia"
-$PostgresServer = "datalens-pg-CHANGE-ME"
+$PostgresServer = "datalens-pg-sai2026"
 $DatabaseName = "datalens"
 $DbAdmin = "datalensadmin"
 $DbAdminPassword = "CHANGE-ME-Use-A-Long-Password"
-$ContainerApp = "datalens-web-CHANGE-ME"
+$ContainerApp = "datalens-web-sai2026"
 $JwtSecret = "CHANGE-ME-Use-A-Long-Random-JWT-Secret"
 
 if ($PostgresServer -like "*CHANGE-ME*" -or $ContainerApp -like "*CHANGE-ME*" -or $DbAdminPassword -like "CHANGE-ME*" -or $JwtSecret -like "CHANGE-ME*") {
@@ -34,6 +34,7 @@ az containerapp up --name $ContainerApp --resource-group $ResourceGroup --locati
 # Secrets are kept in Container Apps, not in the image or source code.
 az containerapp secret set --name $ContainerApp --resource-group $ResourceGroup --secrets "database-url=$DatabaseUrl" "jwt-secret=$JwtSecret"
 az containerapp update --name $ContainerApp --resource-group $ResourceGroup `
-  --set-env-vars "NODE_ENV=production" "DATABASE_URL=secretref:database-url" "JWT_SECRET=secretref:jwt-secret"
+  --set-env-vars "NODE_ENV=production" "DATABASE_URL=secretref:database-url" "JWT_SECRET=secretref:jwt-secret" `
+  --min-replicas 0 --max-replicas 1
 
 az containerapp show --name $ContainerApp --resource-group $ResourceGroup --query properties.configuration.ingress.fqdn --output tsv
