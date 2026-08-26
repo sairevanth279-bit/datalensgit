@@ -1,0 +1,45 @@
+name: Trigger auto deployment for datalens-web
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/datalens-web-AutoDeployTrigger-22a46ad4-4c5e-404a-8767-ffcd2662b67c.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.DATALENSWEB_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          _targetLabelKey_: _targetLabel_
+          registryUrl: ca8b29912eb9acr.azurecr.io
+          registryUsername: ${{ secrets.DATALENSWEB_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.DATALENSWEB_REGISTRY_PASSWORD }}
+          containerAppName: datalens-web
+          resourceGroup: datalens-rg
+          imageToBuild: ca8b29912eb9acr.azurecr.io/datalens-web:${{ github.sha }}
+          
+            
+
+     
+
